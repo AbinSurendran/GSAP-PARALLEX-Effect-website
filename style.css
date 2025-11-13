@@ -1,0 +1,27 @@
+/* :root {
+  --primary: hsl(0, 85%, 50%);
+  --secondary: hsl(0, 0%, 20%);
+  --background: hsl(0, 0%, 98%);
+  --foreground: hsl(0, 0%, 10%);
+  --border: hsl(0, 0%, 88%);
+  --card: hsl(0, 0%, 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, hsl(0, 85%, 50%), hsl(0, 70%, 40%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hover-lift {
+  transition: all 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.parallax-section {
+  position: relative;
+  overflow: hidden;
+} */
+

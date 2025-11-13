@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hero Xpulse - Static GSAP + Tailwind</title>
+
+  <!-- Tailwind CDN (quick dev) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* Design tokens & utilities (kept small — Tailwind used heavily) */
+    :root{
+      --primary: 0 85% 50%;
+      --primary-hex: #ef3b2d;
+    }
+
+    .text-gradient {
+      background: linear-gradient(90deg, hsl(var(--primary)), hsl(0 70% 40%));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glow-red {
+      text-shadow: 0 0 30px rgba(239,59,45,0.25);
+    }
+
+    /* magnetic button wrapper should not overflow layout */
+    .magnetic-btn-wrap { display:inline-block; transform: translateZ(0); }
+
+    /* small util for hero grid background pattern */
+    .bg-dot-grid {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    /* make sections animate nicely on reduce-motion routes */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-[hsl(0_0%_6%)] text-[hsl(0_0%_96%)] antialiased">
+
+  <!-- NAV -->
+  <header class="fixed top-4 left-0 right-0 z-50">
+    <div class="container mx-auto px-6">
+      <nav class="flex items-center justify-between bg-black/40 backdrop-blur rounded-full px-4 py-2 shadow-md">
+        <a href="#" class="font-bold text-xl text-gradient">HERO XPULSE</a>
+        <ul class="flex gap-6 text-sm">
+          <li><a href="#models" class="hover:text-[hsl(var(--primary))] transition">Models</a></li>
+          <li><a href="#features" class="hover:text-[hsl(var(--primary))] transition">Features</a></li>
+          <li><a href="#adventure" class="hover:text-[hsl(var(--primary))] transition">Adventure</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pt-24">
+    <!-- HERO -->
+    <section id="hero" class="relative min-h-screen flex items-center bg-gradient-to-b from-[hsl(0_0%_6%)] via-[hsl(0_0%_8%)] to-[hsl(0_0%_4%)] overflow-hidden">
+      <div class="absolute inset-0 bg-dot-grid opacity-10"></div>
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-20 -right-20 w-96 h-96 bg-[rgba(239,59,45,0.12)] rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-[rgba(59,130,246,0.08)] rounded-full blur-3xl animate-pulse" style="animation-delay: 0.9s"></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 items-center gap-12">
+        <!-- text -->
+        <div id="hero-text" class="space-y-6 max-w-2xl">
+          <div class="inline-block px-4 py-2 rounded-full border border-[rgba(239,59,45,0.12)] bg-[rgba(239,59,45,0.04)]">
+            <span class="text-sm font-semibold text-[hsl(var(--primary))]">NEW LAUNCH</span>
+          </div>
+
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
+            <span class="block text-[hsl(0_0%_96%)]">HERO</span>
+            <span class="block text-gradient glow-red">XPULSE</span>
+            <span class="block text-[hsl(0_0%_96%)]">ADVENTURE</span>
+          </h1>
+
+          <p class="text-lg text-gray-300 max-w-xl">
+            Engineered for those who dare to explore — unmatched performance,
+            modern tech and rugged build to conquer any trail.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <span class="magnetic-btn-wrap">
+              <button class="magnetic-button relative overflow-hidden px-10 py-4 rounded-full bg-[hsl(var(--primary))] text-white font-semibold shadow-2xl">
+                <span class="relative z-10">Explore Models</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-[rgba(255,255,255,0.04)] to-[rgba(255,255,255,0.02)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </button>
+            </span>
+
+            <span class="magnetic-btn-wrap">
+              <button class="magnetic-button relative overflow-hidden px-8 py-4 rounded-full border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] text-white font-medium">
+                Book a Ride
+              </button>
+            </span>
+          </div>
+
+          <!-- stats -->
+          <div class="grid grid-cols-3 gap-6 pt-8 max-w-md">
+            <div class="space-y-1 text-center">
+              <p class="text-2xl md:text-3xl font-bold text-gradient">210cc</p>
+              <p class="text-sm text-gray-400">Engine Power</p>
+            </div>
+            <div class="space-y-1 text-center">
+              <p class="text-2xl md:text-3xl font-bold text-gradient">37.5 Nm</p>
+              <p class="text-sm text-gray-400">Max Torque</p>
+            </div>
+            <div class="space-y-1 text-center">
+              <p class="text-2xl md:text-3xl font-bold text-gradient">270 mm</p>
+              <p class="text-sm text-gray-400">Ground Clearance</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- image -->
+        <div id="hero-image" class="relative" style="perspective: 1000px;">
+          <img id="hero-bike" src="images/x.jpg" alt="Hero Xpulse 210" class="w-full rounded-2xl drop-shadow-2xl" style="transform-style: preserve-3d;" />
+          <div class="absolute -top-20 -right-20 w-80 h-80 bg-[rgba(239,59,45,0.08)] rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-16 -left-16 w-80 h-80 bg-[rgba(59,130,246,0.06)] rounded-full blur-3xl" style="animation-delay: 0.9s"></div>
+        </div>
+      </div>
+
+      <!-- scroll hint -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-center opacity-80">
+        <div class="text-xs uppercase tracking-wider text-gray-400">Scroll Down</div>
+        <div class="mt-2 w-6 h-10 border-2 border-[rgba(255,255,255,0.08)] rounded-full p-1 mx-auto">
+          <div class="w-1 h-3 bg-[hsl(var(--primary))] rounded-full mx-auto animate-pulse"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODELS -->
+    <section id="models" class="py-32 bg-[linear-gradient(180deg,hsl(0_0%_4%),hsl(0_0%_6%))]">
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="models-title text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold"><span class="text-gradient">Explore</span> <span class="text-white">The Range</span></h2>
+          <p class="mt-4 text-gray-400 max-w-3xl mx-auto">Choose your ride — each model tailored for a different kind of adventure.</p>
+        </div>
+
+        <div class="space-y-24">
+          <!-- model card 1 -->
+          <div class="grid lg:grid-cols-2 gap-12 items-center model-card group">
+            <div class="relative overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.03)]">
+              <img src="images/xpulse-hero.jpg" alt="Xpulse 210" class="model-image w-full h-auto transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[rgba(239,59,45,0.12)] to-transparent rounded-2xl"></div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="inline-block px-4 py-2 rounded-full border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)]">
+                <span class="text-sm font-semibold text-[hsl(var(--primary))]">The Ultimate Adventure</span>
+              </div>
+              <h3 class="text-3xl md:text-4xl font-bold">Xpulse 210</h3>
+              <p class="text-gray-300">Dominate terrain with rugged design and advanced suspension—built for explorers.</p>
+              <div class="grid grid-cols-2 gap-3 pt-4">
+                <div class="flex items-center gap-2 text-sm"><div class="w-2 h-2 rounded-full bg-[hsl(var(--primary))]"></div>210cc Engine</div>
+                <div class="flex items-center gap-2 text-sm"><div class="w-2 h-2 rounded-full bg-[hsl(var(--primary))]"></div>37.5 Nm Torque</div>
+              </div>
+              <div class="flex gap-4 pt-4">
+                <button class="px-6 py-3 rounded-full bg-[hsl(var(--primary))]">View Details</button>
+                <button class="px-6 py-3 rounded-full border border-[rgba(255,255,255,0.04)]">Compare</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- model card 2 (reversed) -->
+          <div class="grid lg:grid-cols-2 gap-12 items-center model-card group">
+            <div class="space-y-6 lg:order-2">
+              <div class="inline-block px-4 py-2 rounded-full border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)]">
+                <span class="text-sm font-semibold text-[hsl(var(--primary))]">Racing Spirit Unleashed</span>
+              </div>
+              <h3 class="text-3xl md:text-4xl font-bold">Xpulse Rally</h3>
+              <p class="text-gray-300">Rally-spec performance with street-legal capability for adrenaline seekers.</p>
+              <div class="grid grid-cols-2 gap-3 pt-4">
+                <div class="flex items-center gap-2 text-sm"><div class="w-2 h-2 rounded-full bg-[hsl(var(--primary))]"></div>Rally Suspension</div>
+                <div class="flex items-center gap-2 text-sm"><div class="w-2 h-2 rounded-full bg-[hsl(var(--primary))]"></div>Sport Tires</div>
+              </div>
+              <div class="flex gap-4 pt-4">
+                <button class="px-6 py-3 rounded-full bg-[hsl(var(--primary))]">View Details</button>
+                <button class="px-6 py-3 rounded-full border border-[rgba(255,255,255,0.04)]">Compare</button>
+              </div>
+            </div>
+
+            <div class="relative lg:order-1 overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.03)]">
+              <img src="images/xpulse-rally.jpg" alt="Xpulse Rally" class="model-image w-full h-auto transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[rgba(59,130,246,0.06)] to-transparent rounded-2xl"></div>
+            </div>
+          </div>
+
+          <!-- model card 3 -->
+          <div class="grid lg:grid-cols-2 gap-12 items-center model-card group">
+            <div class="relative overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.03)]">
+              <img src="images/xengine.jpg" alt="Xpulse Pro" class="model-image w-full h-auto transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[rgba(239,59,45,0.06)] to-transparent rounded-2xl"></div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="inline-block px-4 py-2 rounded-full border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)]">
+                <span class="text-sm font-semibold text-[hsl(var(--primary))]">Premium Performance</span>
+              </div>
+              <h3 class="text-3xl md:text-4xl font-bold">Xpulse Pro</h3>
+              <p class="text-gray-300">Enhanced comfort, tech and refined finish for the discerning rider.</p>
+              <div class="grid grid-cols-2 gap-3 pt-4">
+                <div class="flex items-center gap-2 text-sm"><div class="w-2 h-2 rounded-full bg-[hsl(var(--primary))]"></div>Bluetooth</div>
+                <div class="flex items-center gap-2 text-sm"><div class="w-2 h-2 rounded-full bg-[hsl(var(--primary))]"></div>TFT Display</div>
+              </div>
+              <div class="flex gap-4 pt-4">
+                <button class="px-6 py-3 rounded-full bg-[hsl(var(--primary))]">View Details</button>
+                <button class="px-6 py-3 rounded-full border border-[rgba(255,255,255,0.04)]">Compare</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="py-28 bg-[linear-gradient(180deg,hsl(0_0%_4%),hsl(0_0%_6%))]">
+      <div class="container mx-auto px-6 text-center">
+        <div class="features-title mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold"><span class="text-white">Built For </span><span class="text-gradient">Excellence</span></h2>
+          <p class="mt-4 text-gray-400 max-w-3xl mx-auto">Every detail engineered to perfection — features that redefine adventure.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 lg:grid-cols-3 gap-8">
+          <div class="p-8 rounded-2xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.03)] group hover:scale-[1.02] transition">
+            <div class="inline-flex p-4 rounded-xl mb-4 bg-gradient-to-br from-[rgba(239,59,45,0.06)] to-[rgba(59,130,246,0.04)]">
+              <!-- icon placeholder -->
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v18M3 12h18"/></svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2 group-hover:text-gradient transition">Power Performance</h3>
+            <p class="text-gray-400">210cc single-cylinder engine delivering raw power and exceptional torque.</p>
+          </div>
+
+          <div class="p-8 rounded-2xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.03)] group hover:scale-[1.02] transition">
+            <div class="inline-flex p-4 rounded-xl mb-4 bg-gradient-to-br from-[rgba(239,59,45,0.06)] to-[rgba(59,130,246,0.04)]">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3"/></svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2 group-hover:text-gradient transition">Advanced Safety</h3>
+            <p class="text-gray-400">Dual-channel ABS, robust chassis, and superior braking for rider protection.</p>
+          </div>
+
+          <div class="p-8 rounded-2xl bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.03)] group hover:scale-[1.02] transition">
+            <div class="inline-flex p-4 rounded-xl mb-4 bg-gradient-to-br from-[rgba(239,59,45,0.06)] to-[rgba(59,130,246,0.04)]">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 20l9-7-9-7-9 7 9 7z"/></svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2 group-hover:text-gradient transition">Off-Road Ready</h3>
+            <p class="text-gray-400">270mm ground clearance and long-travel suspension for the toughest trails.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADVENTURE -->
+    <section id="adventure" class="relative py-32">
+      <div class="absolute inset-0">
+        <img src="images/adventure-bg.jpg" alt="" class="w-full h-full object-cover opacity-25" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.6)] to-transparent"></div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <div class="max-w-4xl mx-auto space-y-8">
+          <div class="inline-block px-6 py-3 rounded-full border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)]">
+            <span class="text-sm font-semibold text-[hsl(var(--primary))]">Your Journey Starts Here</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold">
+            <span class="text-white">Ready to </span>
+            <span class="text-gradient">Conquer</span>
+            <span class="block text-white">The Unknown?</span>
+          </h2>
+
+          <p class="text-lg text-gray-300 max-w-2xl mx-auto">Every journey tells a story. Make yours legendary with the Hero Xpulse series.</p>
+
+          <div class="flex justify-center gap-6 pt-6">
+            <button class="px-10 py-4 rounded-full bg-[hsl(var(--primary))]">Book Test Ride</button>
+            <button class="px-10 py-4 rounded-full border border-[rgba(255,255,255,0.06)]">Find Dealer</button>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-10 max-w-4xl mx-auto">
+            <div class="space-y-2"><p class="text-2xl md:text-3xl font-bold text-gradient">50K+</p><p class="text-sm text-gray-400 uppercase tracking-wider">Happy Riders</p></div>
+            <div class="space-y-2"><p class="text-2xl md:text-3xl font-bold text-gradient">100+</p><p class="text-sm text-gray-400 uppercase tracking-wider">Cities</p></div>
+            <div class="space-y-2"><p class="text-2xl md:text-3xl font-bold text-gradient">4.8/5</p><p class="text-sm text-gray-400 uppercase tracking-wider">Rating</p></div>
+            <div class="space-y-2"><p class="text-2xl md:text-3xl font-bold text-gradient">24/7</p><p class="text-sm text-gray-400 uppercase tracking-wider">Support</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[hsl(0_0%_7%)] border-t border-[rgba(255,255,255,0.03)] py-10">
+      <div class="container mx-auto px-6 text-center text-sm text-gray-400">
+        <div class="mb-4">
+          <h4 class="text-lg font-bold text-gradient">HERO XPULSE</h4>
+          <p>Adventure Awaits. Every Day.</p>
+        </div>
+        <nav class="flex justify-center gap-6 mb-4">
+          <a href="#" class="hover:text-white">About</a>
+          <a href="#models" class="hover:text-white">Models</a>
+          <a href="#features" class="hover:text-white">Support</a>
+          <a href="#adventure" class="hover:text-white">Contact</a>
+        </nav>
+        <div>&copy; <span id="year"></span> Hero MotoCorp. All rights reserved.</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- main.js (inline for convenience) -->
+  <script>
+    // main.js logic (vanilla) reproducing GSAP animations & interactivity
+    (function () {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // set copyright year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      /* ---------- Smooth reveal for sections (like SmoothScroll component) ---------- */
+      gsap.utils.toArray('section').forEach(section => {
+        // find children to animate (prefer H2, p, imgs, buttons)
+        const targets = section.querySelectorAll('h1, h2, h3, p, img, button, .magnetic-button');
+        if (!targets.length) return;
+        gsap.from(targets, {
+          y: 50,
+          opacity: 0,
+          duration: 0.9,
+          stagger: 0.08,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+      });
+
+      /* ---------- Hero-specific animations ---------- */
+      gsap.from('#hero-text', { y: 80, opacity: 0, duration: 1.2, ease: 'power3.out' });
+      gsap.from('#hero-bike', { x: 120, opacity: 0, duration: 1.3, ease: 'power3.out', delay: 0.2 });
+      // floating loop
+      gsap.to('#hero-bike', { y: -18, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+
+      // 3D tilt effect for hero image (mousemove)
+      (function heroTilt() {
+        const img = document.getElementById('hero-bike');
+        if (!img) return;
+        const wrap = img.parentElement;
+        function onMove(e) {
+          const rect = wrap.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) / rect.width;
+          const dy = (e.clientY - cy) / rect.height;
+          gsap.to(img, { rotationY: dx * 12, rotationX: -dy * 8, duration: 0.6, transformPerspective: 1000, ease: 'power2.out' });
+        }
+        function reset() { gsap.to(img, { rotationX: 0, rotationY: 0, duration: 0.6, ease: 'power2.out' }); }
+        wrap.addEventListener('mousemove', onMove);
+        wrap.addEventListener('mouseleave', reset);
+      })();
+
+      /* ---------- Magnetic Button behavior (MagneticButton component) ---------- */
+      (function magneticButtons() {
+        const wrappers = document.querySelectorAll('.magnetic-btn-wrap');
+        wrappers.forEach(wrap => {
+          const btn = wrap.querySelector('.magnetic-button');
+          if (!btn) return;
+          function onMove(e) {
+            const rect = wrap.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            const max = Math.max(rect.width, rect.height);
+            if (dist < max) {
+              const strength = (max - dist) / max;
+              gsap.to(wrap, { x: dx * 0.25 * strength, y: dy * 0.25 * strength, scale: 1 + 0.04 * strength, duration: 0.35, ease: 'power2.out' });
+            } else {
+              gsap.to(wrap, { x: 0, y: 0, scale: 1, duration: 0.6, ease: 'elastic.out(1,0.6)' });
+            }
+          }
+          function leave() { gsap.to(wrap, { x: 0, y: 0, scale: 1, duration: 0.6, ease: 'elastic.out(1,0.6)' }); }
+          document.addEventListener('mousemove', onMove);
+          wrap.addEventListener('mouseleave', leave);
+          // cleanup not strictly necessary for static site, but leaving handlers global is fine
+        });
+      })();
+
+      /* ---------- Models: individual card reveal + hover 3D tilt + image parallax ---------- */
+      (function modelsAnimations() {
+        const cards = document.querySelectorAll('.model-card');
+        cards.forEach((card, index) => {
+          // stagger entrance by card
+          gsap.from(card, {
+            y: 80,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 85%' }
+          });
+
+          // parallax for image inside card
+          const img = card.querySelector('.model-image');
+          if (img) {
+            gsap.to(img, {
+              y: -40,
+              scale: 1.05,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+              }
+            });
+          }
+
+          // hover 3D tilt on the whole card
+          function onMove(e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const rotX = (y - cy) / 20;
+            const rotY = (cx - x) / 20;
+            gsap.to(card, { rotationX: rotX, rotationY: rotY, duration: 0.45, transformPerspective: 1000, ease: 'power2.out' });
+          }
+          function leave() { gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.5, ease: 'power2.out' }); }
+          card.addEventListener('mousemove', onMove);
+          card.addEventListener('mouseleave', leave);
+        });
+      })();
+
+      /* ---------- Features: title animation + staggered cards ---------- */
+      (function features() {
+        const title = document.querySelector('.features-title');
+        if (title) {
+          gsap.from(title, {
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: title, start: 'top 85%' }
+          });
+        }
+        const items = document.querySelectorAll('#features .grid > div');
+        if (items.length) {
+          gsap.from(items, {
+            y: 80,
+            opacity: 0,
+            duration: 0.9,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: items[0], start: 'top 85%' }
+          });
+        }
+      })();
+
+      /* ---------- Adventure section: parallax background and particles ---------- */
+      (function adventure() {
+        const advSection = document.getElementById('adventure');
+        if (!advSection) return;
+        // parallax background image inside section
+        const bgImg = advSection.querySelector('img');
+        if (bgImg) {
+          gsap.to(bgImg, {
+            y: -120,
+            ease: 'none',
+            scrollTrigger: { trigger: advSection, start: 'top bottom', end: 'bottom top', scrub: 1 }
+          });
+        }
+
+        // small reveal of content
+        const contentTargets = advSection.querySelectorAll('h2, p, button, .grid > div');
+        gsap.from(contentTargets, {
+          y: 60,
+          opacity: 0,
+          stagger: 0.12,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: advSection, start: 'top 85%' }
+        });
+      })();
+
+      /* ---------- global image parallax (light) ---------- */
+      gsap.utils.toArray('img').forEach(img => {
+        gsap.to(img, {
+          y: -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>
