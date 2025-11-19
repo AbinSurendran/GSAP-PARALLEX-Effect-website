@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Hero Xpulse - Static GSAP + Tailwind</title>
 
+  <link rel="stylesheet" href="style.css">
   <!-- Tailwind CDN (quick dev) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -12,37 +13,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <style>
-    /* Design tokens & utilities (kept small — Tailwind used heavily) */
-    :root{
-      --primary: 0 85% 50%;
-      --primary-hex: #ef3b2d;
-    }
-
-    .text-gradient {
-      background: linear-gradient(90deg, hsl(var(--primary)), hsl(0 70% 40%));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .glow-red {
-      text-shadow: 0 0 30px rgba(239,59,45,0.25);
-    }
-
-    /* magnetic button wrapper should not overflow layout */
-    .magnetic-btn-wrap { display:inline-block; transform: translateZ(0); }
-
-    /* small util for hero grid background pattern */
-    .bg-dot-grid {
-      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-
-    /* make sections animate nicely on reduce-motion routes */
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; animation: none !important; }
-    }
-  </style>
 </head>
 <body class="bg-[hsl(0_0%_6%)] text-[hsl(0_0%_96%)] antialiased">
 
@@ -506,4 +476,5 @@
     })();
   </script>
 </body>
+<script src="main.js"></script>
 </html>

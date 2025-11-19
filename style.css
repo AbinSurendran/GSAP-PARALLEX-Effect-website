@@ -1,4 +1,4 @@
-/* :root {
+:root {
   --primary: hsl(0, 85%, 50%);
   --secondary: hsl(0, 0%, 20%);
   --background: hsl(0, 0%, 98%);
@@ -13,6 +13,31 @@
   -webkit-text-fill-color: transparent;
 }
 
+.glow-red {
+  text-shadow: 0 0 30px rgba(239, 59, 45, 0.25);
+}
+
+.magnetic-btn-wrap {
+  display: inline-block;
+  transform: translateZ(0);
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 50px 50px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 .hover-lift {
   transition: all 0.3s ease;
 }
@@ -20,8 +45,7 @@
   transform: translateY(-8px) scale(1.03);
 }
 
-.parallax-section {
+/* .parallax-section {
   position: relative;
   overflow: hidden;
 } */
-
